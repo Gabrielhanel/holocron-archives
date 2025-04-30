@@ -39,11 +39,16 @@ export default function Person( {route} ) {
                 </View>
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'space-beetween', marginTop: 20, justifyContent: 'center'}}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Spaceship')} style={[styles.button, {backgroundColor: '#1F2833'}]}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Spaceship', {
+                        starship: person.starships,
+                    })} style={[styles.button, {backgroundColor: '#1F2833'}]}>
                         <Text style={[styles.txtbutton, {color: '#D3D3D3'}]}>NAVES</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => navigation.navigate('Film')} style={[styles.button, {backgroundColor: '#D3D3D3'}]}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Film', {
+                        film: person.films,
+                    }
+                    )} style={[styles.button, {backgroundColor: '#D3D3D3'}]}>
                         <Text style={[styles.txtbutton, {color: '#1F2833'}]}>FILMES</Text>
                     </TouchableOpacity>
                 </View>
