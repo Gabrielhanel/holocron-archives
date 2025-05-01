@@ -2,7 +2,8 @@
 
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
-
+import GoBack from '../components/goBack';
+import AboutButton from '../components/aboutButton';
 export default function Person( {route} ) {
     const { person, img } = route.params;
 
@@ -11,15 +12,8 @@ export default function Person( {route} ) {
     return (
         <View style={{ flex: 1, backgroundColor: '#0B0C10' }}>
             <View flexDirection='row' justifyContent='space-between' >
-                <TouchableOpacity onPress={navigation.goBack}>
-                    <Image source={require('../img/back.png')} style={styles.back}/>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('About')}>
-                    <Image
-                    source={require('../img/about.png')}
-                    style={styles.about}
-                    />
-                </TouchableOpacity>
+                <GoBack/>
+                <AboutButton/>
             </View>
             <View style={{alignItems: 'center'}}>
                 <Image source={img} style={styles.img}/>
@@ -41,12 +35,14 @@ export default function Person( {route} ) {
             <View style={{flexDirection: 'row', justifyContent: 'space-beetween', marginTop: 20, justifyContent: 'center'}}>
                     <TouchableOpacity onPress={() => navigation.navigate('Spaceship', {
                         starship: person.starships,
+                        name: person.name,
                     })} style={[styles.button, {backgroundColor: '#1F2833'}]}>
                         <Text style={[styles.txtbutton, {color: '#D3D3D3'}]}>NAVES</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => navigation.navigate('Film', {
                         film: person.films,
+                        name: person.name,
                     }
                     )} style={[styles.button, {backgroundColor: '#D3D3D3'}]}>
                         <Text style={[styles.txtbutton, {color: '#1F2833'}]}>FILMES</Text>
@@ -73,10 +69,11 @@ const styles = StyleSheet.create({
     dataPerson: {
         color: '#F1F1F1',
         fontFamily: 'Audiowide_400Regular',
-        fontSize: 22,
+        fontSize: 20,
         marginBottom: 10,
         textAlign: 'center',
         padding: 10,
+        wordWrap: 'break-word',
     },
     backgroundDataPerson: { 
         flexDirection: 'row', 
@@ -96,18 +93,6 @@ const styles = StyleSheet.create({
         maxWidth: 150,
         wordWrap: 'break-word',
         maxHeight: 300,
-    },
-    back: {
-        width: 60,
-        height: 40,
-        marginTop: 50,
-        marginLeft: 20
-    },
-    about: {
-        width: 60,
-        height: 60,
-        marginTop: 50,
-        marginRight: 20
     },
     txtbutton: {
         color: '#F1F1F1',

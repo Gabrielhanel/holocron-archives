@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useFonts } from 'expo-font';
 import { BrunoAce_400Regular } from '@expo-google-fonts/bruno-ace';
 import { Audiowide_400Regular } from '@expo-google-fonts/audiowide';
+import { View, ActivityIndicator } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,11 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return null; // << Aqui trocando AppLoading por null
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#0B0C10' }}>
+        <ActivityIndicator size="large" color="#fff" />
+      </View>
+    );
   }
 
   return (
@@ -54,3 +59,16 @@ export default function App() {
     </NavigationContainer>
   );
 }
+/*
+Miojo do Jacquin:
+Ingredientes:
+- 1 pacote de miojo;
+- 1 colher de manteiga;
+- Metade do tempero do miojo;
+- Raspas de limão siciliano.
+
+Passo a passo:
+1 - Cozinhe a massa numa frigideira com um copo d´água e assim que a massa sugar toda a água coloque mais meio copo.
+2 - Assim que você perceber que a massa está cozida, coloque uma colher de manteiga, raspas de limão e o tempero do miojo.
+3 - Mexa tudo e sirva em seguida. Importante servir quente!
+*/

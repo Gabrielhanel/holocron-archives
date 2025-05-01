@@ -113,9 +113,6 @@ const styles = StyleSheet.create({
   width: 150,
   height: 200,
   borderRadius: 10,
-  //shadowColor: 'grey',
-  //shadowRadius: 3.5,
-  //shadowOpacity: 0.25,
   },
   nameCard: {
     fontFamily: 'BrunoAce_400Regular',
