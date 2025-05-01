@@ -3,14 +3,14 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function AboutButton() {
     const navigation = useNavigation();
- return (
+return (
         <TouchableOpacity onPress={() => navigation.navigate('About')}>
             <Image
             source={require('../img/about.png')}
             style={styles.about}
             />
         </TouchableOpacity>
-  );
+);
 }
 styles = StyleSheet.create({
     about: {

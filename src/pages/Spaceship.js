@@ -3,47 +3,47 @@ import { useEffect, useState } from 'react';
 import GoBack from '../components/goBack';
 import AboutButton from '../components/aboutButton';
 export default function Spaceship({ route }) {
-  const { starship, name } = route.params; // Array de URLs das naves
-  const [naves, setNaves] = useState([]);
-  const [carregando, setCarregando] = useState(true);
+  const { starship, name } = route.params;
+  const [spaceships, setSpaceships] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function carregarNaves() {
+    async function getSpaceships() {
       try {
-        const dados = await Promise.all(
+        const data = await Promise.all(
           starship.map(async (url) => {
-            const resposta = await fetch(url);
-            return await resposta.json();
+            const response = await fetch(url);
+            return await response.json();
           })
         );
-        setNaves(dados);
-      } catch (erro) {
-        console.error('Erro ao carregar naves:', erro);
+        setSpaceships(data);
+      } catch (error) {
+        console.error('Error loading spaceships:', error);
       } finally {
-        setCarregando(false);
+        setLoading(false);
       }
     }
 
-    carregarNaves();
+    getSpaceships();
   }, []);
 
-  if (carregando) {
+  if (loading) {
     return (
-      <View style={styles.centralizado}>
+      <View style={styles.center}>
         <ActivityIndicator size="large" color="#fff" />
       </View>
     );
   }
 
-  if (naves.length === 0) {
+  if (spaceships.length === 0) {
     return (
       <View style={styles.container}>
         <View flexDirection='row' justifyContent='space-between' >
             <GoBack/>
             <AboutButton/>
         </View>
-        <View style={styles.centralizado}>
-            <Text style={styles.texto}>Nenhuma nave encontrada.</Text>
+        <View style={styles.center}>
+            <Text style={styles.text}>No spaceships found.</Text>
         </View>
       </View>
     );
@@ -56,21 +56,21 @@ export default function Spaceship({ route }) {
         <AboutButton/>
         </View>
         <View style={styles.namePersonStarship}>
-        <Text style={[styles.texto, { fontSize: 22, marginBottom: 10, maxWidth: 220, textAlign: 'center' }]}>
-          NAVES DE {name.toUpperCase()}
+        <Text style={[styles.text, { fontSize: 22, marginBottom: 10, maxWidth: 220, textAlign: 'center' }]}>
+        SPACESHIPS OF {name.toUpperCase()}
         </Text>
         </View>
 
       <FlatList
         keyExtractor={(item) => item.name}
-        data={naves}
+        data={spaceships}
         renderItem={({ item }) => (
-          <View style={styles.cartao}>
-            <Text style={styles.texto}>Nome: {item.name}</Text>
-            <Text style={styles.texto}>Modelo: {item.model}</Text>
-            <Text style={styles.texto}>Fabricante: {item.manufacturer}</Text>
-            <Text style={styles.texto}>Classe: {item.starship_class}</Text>
-            <Text style={styles.texto}>Passageiros: {item.passengers}</Text>
+          <View style={styles.card}>
+            <Text style={styles.text}>Name: {item.name}</Text>
+            <Text style={styles.text}>Model: {item.model}</Text>
+            <Text style={styles.text}>Manufacturer: {item.manufacturer}</Text>
+            <Text style={styles.text}>Class: {item.starship_class}</Text>
+            <Text style={styles.text}>Passengers: {item.passengers}</Text>
           </View>
         )}
       />
@@ -84,19 +84,19 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#0B0C10',
   },
-  centralizado: {
+  center: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#0B0C10',
   },
-  texto: {
+  text: {
     color: '#F1F1F1',
     fontSize: 16,
     fontFamily: 'Audiowide_400Regular',
     padding: 5,
   },
-  cartao: {
+  card: {
     backgroundColor: '#1F2833',
     padding: 15,
     borderRadius: 10,

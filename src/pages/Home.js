@@ -10,42 +10,35 @@ export default function Home() {
   useEffect(() => {
     async function loadPeople() {
       const response = await api.get('/people');
-    const idsDesejados = ['1', '2', '4', '5', '13', '14', '20'];
+    const selectedIds = ['1', '2', '4', '5', '13', '14', '20'];
 
     const filtrados = response.data.filter(item => {
       const id = item.url.split('/').filter(Boolean).pop();
-      return idsDesejados.includes(id);
+      return selectedIds.includes(id);
     });
 
-    function pegarImagem(name) {
-      switch (name) {
-        case 'Luke Skywalker':
-          return require('../img/luke.png');
-        case 'Leia Organa':
-          return require('../img/leia.png');
-        case 'Darth Vader':
-          return require('../img/darth_vader.png');
-        case 'Chewbacca':
-            return require('../img/chewbacca.png');
-        case 'Yoda':
-            return require('../img/yoda.png');
-        case 'Han Solo':
-          return require('../img/han-solo.png');
-        case 'C-3PO':
-          return require('../img/C3PO.png');
-        default:
-          return require('../img/yoda.png');
-      }
+    const imagens = {
+      'Luke Skywalker': require('../img/luke.png'),
+      'Leia Organa': require('../img/leia.png'),
+      'Darth Vader': require('../img/darth_vader.png'),
+      'Chewbacca': require('../img/chewbacca.png'),
+      'Yoda': require('../img/yoda.png'),
+      'Han Solo': require('../img/han-solo.png'),
+      'C-3PO': require('../img/C3PO.png'),
+    };
+
+    function getImage(name) {
+      return imagens[name] || require('../img/capacete-stormtrooper.png');
     }
 
-    const pessoasComImagem = filtrados.map(item => {
+    const peopleWithImages = filtrados.map(item => {
       return {
         ...item,
-        imagem: pegarImagem(item.name),
+        image: getImage(item.name),
       };
     });
     
-    setPeople(pessoasComImagem);
+    setPeople(peopleWithImages);
     }
     loadPeople();
   }, []);
@@ -60,11 +53,11 @@ export default function Home() {
       renderItem={({item}) => 
       <TouchableOpacity onPress={() => navigation.navigate('Person', {
         person: item,
-        img: item.imagem,
+        img: item.image,
       })}>
         <View>
             <View style={styles.card}>
-              <Image source={item.imagem} style={styles.img} />
+              <Image source={item.image} style={styles.img} />
               <Text style={styles.nameCard}>{item.name.toUpperCase()}</Text>
           </View>
         </View>

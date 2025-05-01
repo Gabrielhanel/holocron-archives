@@ -1,39 +1,36 @@
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
 import { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import GoBack from '../components/goBack';
 import AboutButton from '../components/aboutButton';
 
 export default function Film({ route }) {
-  const { film, name } = route.params; // Array de URLs dos filmes
+  const { film, name } = route.params; 
   const [films, setFilms] = useState([]);
-  const [carregando, setCarregando] = useState(true);
-
-  const navigation = useNavigation();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function carregarFilmes() {
+    async function getFilms() {
       try {
-        const dados = await Promise.all(
+        const data = await Promise.all(
           film.map(async (url) => {
-            const resposta = await fetch(url);
-            return await resposta.json();
+            const response = await fetch(url);
+            return await response.json();
           })
         );
-        setFilms(dados);
-      } catch (erro) {
-        console.error('Erro ao carregar filmes:', erro);
+        setFilms(data);
+      } catch (error) {
+        console.error('Error loading films:', error);
       } finally {
-        setCarregando(false);
+        setLoading(false);
       }
     }
 
-    carregarFilmes();
+    getFilms();
   }, []);
 
-  if (carregando) {
+  if (loading) {
     return (
-      <View style={styles.centralizado}>
+      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
         <ActivityIndicator size="large" color="#fff" />
       </View>
     );
@@ -41,9 +38,9 @@ export default function Film({ route }) {
 
   if (films.length === 0) {
     return (
-      <View style={styles.centralizado}>
+      <View>
         <GoBack />
-        <Text style={styles.texto}>Nenhum filme encontrado.</Text>
+        <Text style={[styles.text, {textAlign: 'center'}]}>Not films found.</Text>
       </View>
     );
   }
@@ -51,20 +48,20 @@ export default function Film({ route }) {
   return (
     <View style={{backgroundColor: '#0B0C10', flex: 1}}>
     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <GoBack/>
+        <GoBack/>
     <AboutButton/>
     </View>
     <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
-        <Text style={[styles.texto, { fontSize: 22, marginBottom: 50, maxWidth: 220, textAlign: 'center', padding: 0 }]}>FILMES DE {name.toUpperCase()}</Text>
+        <Text style={[styles.text, { fontSize: 22, marginBottom: 50, maxWidth: 220, textAlign: 'center', padding: 0 }]}>FILMES DE {name.toUpperCase()}</Text>
     </View>
       <FlatList
         keyExtractor={(item) => item.title}
         data={films}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={styles.texto}>Título: {item.title}</Text>
-            <Text style={styles.texto}>Lançamento: {item.release_date}</Text>
-            <Text style={styles.texto}>Diretor: {item.director}</Text>
+            <Text style={styles.text}>Title: {item.title}</Text>
+            <Text style={styles.text}>Release Date: {item.release_date}</Text>
+            <Text style={styles.text}>Director: {item.director}</Text>
           </View>
         )}
       />
@@ -73,7 +70,7 @@ export default function Film({ route }) {
 }
 
 const styles = StyleSheet.create({
-  texto: {
+  text: {
     fontSize: 16,
     fontFamily: 'Audiowide_400Regular',
     color: '#F1F1F1',

@@ -1,4 +1,3 @@
-// TRANSFORMAR ITEM ABOUT E BOTÃO SETINHA DE VOLTAR EM COMPONENTES
 
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
@@ -11,7 +10,7 @@ export default function Person( {route} ) {
 
     return (
         <View style={{ flex: 1, backgroundColor: '#0B0C10' }}>
-            <View flexDirection='row' justifyContent='space-between' >
+            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <GoBack/>
                 <AboutButton/>
             </View>
@@ -32,12 +31,12 @@ export default function Person( {route} ) {
                     <Text style={styles.dataPerson}>GENDER: {person.gender.toUpperCase()}</Text>
                 </View>
             </View>
-            <View style={{flexDirection: 'row', justifyContent: 'space-beetween', marginTop: 20, justifyContent: 'center'}}>
+            <View style={{flexDirection: 'row', justifyContent: 'space-beetween', marginTop: 20}}>
                     <TouchableOpacity onPress={() => navigation.navigate('Spaceship', {
                         starship: person.starships,
                         name: person.name,
                     })} style={[styles.button, {backgroundColor: '#1F2833'}]}>
-                        <Text style={[styles.txtbutton, {color: '#D3D3D3'}]}>NAVES</Text>
+                        <Text style={[styles.txtbutton, {color: '#D3D3D3'}]}>STARSHIPS</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => navigation.navigate('Film', {
@@ -45,7 +44,7 @@ export default function Person( {route} ) {
                         name: person.name,
                     }
                     )} style={[styles.button, {backgroundColor: '#D3D3D3'}]}>
-                        <Text style={[styles.txtbutton, {color: '#1F2833'}]}>FILMES</Text>
+                        <Text style={[styles.txtbutton, {color: '#1F2833'}]}>FILMS</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
     txtbutton: {
         color: '#F1F1F1',
         fontFamily: 'Audiowide_400Regular',
-        fontSize: 20,
+        fontSize: 18,
         marginBottom: 10,
         textAlign: 'center',
         padding: 10,
@@ -106,8 +105,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#1F2833',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 20,
-        width: 140,
+        marginLeft: 10,
+        width: 160,
         height: 50,
         borderRadius: 10,
     },
