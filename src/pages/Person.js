@@ -1,5 +1,5 @@
 
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import GoBack from '../components/goBack';
 import AboutButton from '../components/aboutButton';
@@ -10,6 +10,7 @@ export default function Person( {route} ) {
 
     return (
         <View style={{ flex: 1, backgroundColor: '#0B0C10' }}>
+            <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <GoBack/>
                 <AboutButton/>
@@ -48,6 +49,7 @@ export default function Person( {route} ) {
                     </TouchableOpacity>
                 </View>
             </View>
+            </ScrollView>
         </View>
     )
 }

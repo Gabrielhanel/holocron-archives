@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native'
 import api from '../services/Api';
 import { useNavigation } from '@react-navigation/native';
 
@@ -53,6 +53,7 @@ export default function Home() {
       key={'2columns'}
       keyExtractor={(item) => item.name}
       data={people}
+      showsVerticalScrollIndicator={false}
       renderItem={({item}) => 
       <TouchableOpacity onPress={() => navigation.navigate('Person', {
         person: item,
@@ -68,7 +69,7 @@ export default function Home() {
       </TouchableOpacity>
       }
       />
-    </View>
+      </View>
   )
 }
 

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import { useEffect, useState } from 'react';
 import GoBack from '../components/goBack';
 import AboutButton from '../components/aboutButton';
@@ -64,6 +64,7 @@ export default function Spaceship({ route }) {
       <FlatList
         keyExtractor={(item) => item.name}
         data={spaceships}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.card}>
             <Text style={styles.text}>Name: {item.name}</Text>

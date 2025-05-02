@@ -57,6 +57,7 @@ export default function Film({ route }) {
       <FlatList
         keyExtractor={(item) => item.title}
         data={films}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.card}>
             <Text style={styles.text}>Title: {item.title}</Text>
