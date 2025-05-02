@@ -52,7 +52,7 @@ export default function Film({ route }) {
     <AboutButton/>
     </View>
     <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
-        <Text style={[styles.text, { fontSize: 22, marginBottom: 50, maxWidth: 220, textAlign: 'center', padding: 0 }]}>FILMES DE {name.toUpperCase()}</Text>
+        <Text style={[styles.text, { fontSize: 22, marginBottom: 50, maxWidth: 220, textAlign: 'center', padding: 0 }]}>{name.toUpperCase()} MOVIES</Text>
     </View>
       <FlatList
         keyExtractor={(item) => item.title}
