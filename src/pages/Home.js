@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     async function loadPeople() {
       const response = await api.get('/people');
-    const selectedIds = ['1', '2', '4', '5', '13', '14', '20'];
+    const selectedIds = ['1', '2', '3', '4', '5', '13', '14', '20', '22', '44'];
 
     const filtrados = response.data.filter(item => {
       const id = item.url.split('/').filter(Boolean).pop();
@@ -25,6 +25,9 @@ export default function Home() {
       'Yoda': require('../img/yoda.png'),
       'Han Solo': require('../img/han-solo.png'),
       'C-3PO': require('../img/C3PO.png'),
+      'R2-D2': require('../img/R2-D2.png'),
+      'Darth Maul': require('../img/darth-maul.png'),
+      'Boba Fett': require('../img/boba-fett.png'),
     };
 
     function getImage(name) {
@@ -82,10 +85,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   img: {
-    width: 60,
-    height: 130,
+    maxWidth: 75,
+    maxHeight: 140,
     marginRight: 10,
-    marginBottom: 5
+    marginBottom: 5,
   },
   title: {
     fontFamily: 'Audiowide_400Regular',
