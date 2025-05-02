@@ -12,12 +12,12 @@ export default function Home() {
       const response = await api.get('/people');
     const selectedIds = ['1', '2', '3', '4', '5', '13', '14', '20', '22', '44'];
 
-    const filtrados = response.data.filter(item => {
+    const filteredCharacters = response.data.filter(item => {
       const id = item.url.split('/').filter(Boolean).pop();
       return selectedIds.includes(id);
     });
 
-    const imagens = {
+    const images = {
       'Luke Skywalker': require('../img/luke.png'),
       'Leia Organa': require('../img/leia.png'),
       'Darth Vader': require('../img/darth_vader.png'),
@@ -31,10 +31,10 @@ export default function Home() {
     };
 
     function getImage(name) {
-      return imagens[name] || require('../img/capacete-stormtrooper.png');
+      return images[name] || require('../img/capacete-stormtrooper.png');
     }
 
-    const peopleWithImages = filtrados.map(item => {
+    const peopleWithImages = filteredCharacters.map(item => {
       return {
         ...item,
         image: getImage(item.name),
