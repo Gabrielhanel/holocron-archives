@@ -59,16 +59,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-/*
-Miojo do Jacquin:
-Ingredientes:
-- 1 pacote de miojo;
-- 1 colher de manteiga;
-- Metade do tempero do miojo;
-- Raspas de limão siciliano.
-
-Passo a passo:
-1 - Cozinhe a massa numa frigideira com um copo d´água e assim que a massa sugar toda a água coloque mais meio copo.
-2 - Assim que você perceber que a massa está cozida, coloque uma colher de manteiga, raspas de limão e o tempero do miojo.
-3 - Mexa tudo e sirva em seguida. Importante servir quente!
-*/
